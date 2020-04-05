@@ -132,16 +132,30 @@
       handleClick(tab, event) {
         if (tab.name == "first") {
           this.loadBlogs(1, this.pageSize)
+
+
+
         } else if (tab.name == "second") {
           this.creeperData(1, 1)
         }
       },
       goRecommentDetails: function (item) {
-        const {href} = this.$router.resolve({
-          path: '/RecommendDetail',
-          query: {id: item.id}
-        })
-        window.open(href, '_blank')
+        console.log(item);
+        console.log(this.activeName);
+        if(this.activeName=="second"){
+          const {href} = this.$router.resolve({
+            path: '/RecommendDetail',
+            query: {id: item.id}
+          })
+          window.open(href, '_blank')
+        }else{
+          const {href} = this.$router.resolve({
+            path: '/BlogDetail',
+            query: {aid: item.id}
+          })
+          window.open(href, '_blank')
+        }
+
       },
       creeperData(page, count) {
         var _this = this;
