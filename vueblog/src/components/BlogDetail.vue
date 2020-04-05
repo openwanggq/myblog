@@ -41,7 +41,7 @@
         </div>
       </el-col>
       <el-col>
-        <div style="text-align: left" v-html="article.htmlContent">
+        <div class="article-content" style="text-align: left" v-html="article.htmlContent">
         </div>
       </el-col>
     </el-row>
@@ -169,5 +169,8 @@
   .home_userinfoContainer {
     display: inline;
     margin-right: 20px;
+  }
+  .article-content p img{
+    width: 100%;
   }
 </style>
