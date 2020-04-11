@@ -11,8 +11,8 @@
             <!--<el-dropdown-item command="sysMsg" v-if="isLogin">系统消息</el-dropdown-item>-->
             <!--<el-dropdown-item command="MyArticle" v-if="isLogin">我的文章</el-dropdown-item>-->
             <el-dropdown-item command="MyHome" v-if="isLogin">个人中心</el-dropdown-item>
-            <el-dropdown-item command="logout" divided >{{isLogin?"退出登录":"登录"}}</el-dropdown-item>
-            <el-dropdown-item command="Register" divided v-if="!isLogin" >注册账号</el-dropdown-item>
+            <el-dropdown-item command="logout" divided>{{isLogin?"退出登录":"登录"}}</el-dropdown-item>
+            <el-dropdown-item command="Register" divided v-if="!isLogin">注册账号</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -80,14 +80,14 @@
         selItems: [],
         currentPage: 1,
         totalCount: -1,
-        pageSize: 6,
+        pageSize: 1,
         keywords: '',
         dustbinData: [],
         count: 100
       }
     },
     methods: {
-      goLogin: function(){
+      goLogin: function () {
         console.log(1);
         const {href} = this.$router.resolve({
           path: '/Login',
@@ -106,7 +106,7 @@
             }).then(function () {
               getRequest("/logout")
               _this.currentUserName = '游客';
-              localStorage.setItem('token','');
+              localStorage.setItem('token', '');
             }, function () {
               //取消
             })
@@ -117,12 +117,12 @@
             window.open(href, '_blank')
           }
 
-        }else if(command == 'Register'){
+        } else if (command == 'Register') {
           const {href} = this.$router.resolve({
             path: '/Register'
           })
           window.open(href, '_blank')
-        }else if(command == 'MyHome'){
+        } else if (command == 'MyHome') {
           const {href} = this.$router.resolve({
             path: '/Home'
           })
@@ -131,10 +131,7 @@
       },
       handleClick(tab, event) {
         if (tab.name == "first") {
-          this.loadBlogs(1, this.pageSize)
-
-
-
+            this.loadBlogs(1, this.count)
         } else if (tab.name == "second") {
           this.creeperData(1, 1)
         }
@@ -142,26 +139,25 @@
       goRecommentDetails: function (item) {
         console.log(item);
         console.log(this.activeName);
-        if(this.activeName=="second"){
+        if (this.activeName == "second") {
           const {href} = this.$router.resolve({
             path: '/RecommendDetail',
             query: {id: item.id}
           })
           window.open(href, '_blank')
-        }else{
+        } else {
           const {href} = this.$router.resolve({
             path: '/BlogDetail',
             query: {aid: item.id}
           })
           window.open(href, '_blank')
         }
-
       },
       creeperData(page, count) {
         var _this = this;
         this.state = 1;
         var url = '';
-        url = "/article/reptiles";
+        url = "/article/reptiles?" + "page=" + 1 + "&count=" + 200 + "&keywords=" + this.keywords;
         getRequest(url).then(resp => {
           _this.articles = resp.data.articles;
         })
@@ -198,9 +194,9 @@
       var _this = this;
       getRequest("/currentUserName").then(function (msg) {
         console.log(msg);
-        if(msg.data.msg=="尚未登录，请登录!"){
-          _this.currentUserName ='游客';
-        }else{
+        if (msg.data.msg == "尚未登录，请登录!") {
+          _this.currentUserName = '游客';
+        } else {
           _this.currentUserName = msg.data;
           _this.isLogin = true
         }
@@ -209,13 +205,13 @@
         _this.currentUserName = '游客';
         _this.isLogin = false
       });
-      this.loadBlogs(1, this.pageSize);
+      this.loadBlogs(1, this.count);
 
       this.creeperData()
       var _this = this;
       window.bus.$on('blogTableReload', function () {
         _this.loading = true;
-        _this.loadBlogs(_this.currentPage, _this.pageSize);
+        _this.loadBlogs(_this.currentPage, _this.count);
       })
     },
 
@@ -223,8 +219,8 @@
 </script>
 <style>
   /*a{*/
-    /*color: #333;*/
-/*text-decoration: none;*/
+  /*color: #333;*/
+  /*text-decoration: none;*/
   /*}*/
 
   .recommend-header {

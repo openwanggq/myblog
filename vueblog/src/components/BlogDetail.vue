@@ -1,7 +1,7 @@
 <template>
   <div class="home_container">
     <el-header>
-      <div class="home_title">{{currentUserName}}的博客</div>
+      <div class="home_title">{{currentUserName}}的内容</div>
       <div class="home_userinfoContainer">
         <el-dropdown @command="handleCommand">
   <span class="el-dropdown-link home_userinfo">{{currentUserName}}
@@ -137,7 +137,8 @@
   }
 
   .content-contanier {
-    padding: 20px;
+    padding: 20px 60px;
+    width: 100%;
   }
 
   .el-header {
@@ -171,6 +172,6 @@
     margin-right: 20px;
   }
   .article-content p img{
-    width: 100%;
+    max-width: 100%;
   }
 </style>
