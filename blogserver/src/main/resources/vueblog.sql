@@ -16,8 +16,8 @@ DROP TABLE IF EXISTS `article_reptile`;
 CREATE TABLE `article_reptile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
-  `mdContent` text COMMENT 'md文件源码',
-  `htmlContent` text COMMENT 'html源码',
+  `mdContent` mediumtext COMMENT 'md文件源码',
+  `htmlContent` mediumtext COMMENT 'html源码',
   `summary` text,
   `cid` int(11) DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
@@ -37,8 +37,8 @@ DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
-  `mdContent` text COMMENT 'md文件源码',
-  `htmlContent` text COMMENT 'html源码',
+  `mdContent` mediumtext COMMENT 'md文件源码',
+  `htmlContent` mediumtext COMMENT 'html源码',
   `summary` text,
   `cid` int(11) DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
