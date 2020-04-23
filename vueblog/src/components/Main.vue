@@ -130,6 +130,7 @@
         }
       },
       handleClick(tab, event) {
+        console.log(tab.name);
         if (tab.name == "first") {
             this.loadBlogs(1, this.count)
         } else if (tab.name == "second") {
@@ -206,13 +207,12 @@
         _this.isLogin = false
       });
       this.loadBlogs(1, this.count);
-
-      this.creeperData()
+      // this.creeperData()
       var _this = this;
-      window.bus.$on('blogTableReload', function () {
-        _this.loading = true;
-        _this.loadBlogs(_this.currentPage, _this.count);
-      })
+      // window.bus.$on('blogTableReload', function () {
+      //   _this.loading = true;
+      //   _this.loadBlogs(_this.currentPage, _this.count);
+      // })
     },
 
   }

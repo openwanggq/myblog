@@ -41,7 +41,7 @@
         </div>
       </el-col>
       <el-col>
-        <div style="text-align: left" v-html="article.htmlContent">
+        <div class="article" v-html="article.htmlContent">
         </div>
       </el-col>
     </el-row>
@@ -165,5 +165,10 @@
   .home_userinfoContainer {
     display: inline;
     margin-right: 20px;
+  }
+  .article{
+    text-align: left;
+    padding: 30px 80px;
+    line-height: 30px;
   }
 </style>

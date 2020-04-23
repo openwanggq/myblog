@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-let base = 'http://192.168.1.100:8081/api';
-// let base = 'http://47.114.189.146:8081/api';
+// let base = 'http://192.168.1.100:8081/api';
+let base = 'http://47.114.189.146:8081/api';
 // let base = 'http://localhost:8081/api';
 export const postRequest = (url, params) => {
   // let token = this.$global_msg.token;
