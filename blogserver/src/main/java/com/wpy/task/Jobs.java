@@ -45,7 +45,21 @@ public class Jobs {
     public final static long ONE_Minute = 60 * 1000;
     public final static long ONE_HOUR = 60 * 60 * 1000;
     public final static long TWO_HOUR = 2 * 60 * 60 * 1000;
+    public final static long SIX_HOUR = 6 * 60 * 60 * 1000;
+    //    String netSite = "https://www.jianshu.com/";
+//    String netSite = "https://www.jianshu.com/c/3fde3b545a35";
+//    String netSite = "https://www.jianshu.com/c/NEt52a";
 
+    String[] netSites = new String[]{"https://www.jianshu.com/"
+            , "https://www.jianshu.com/c/3fde3b545a35" // andorid知识
+            ,"https://www.jianshu.com/c/5139d555c94d"  // Android开发经验谈
+            ,"https://www.jianshu.com/c/d1591c322c89"  // Android开发
+            ,"https://www.jianshu.com/c/58b4c20abf2f"  // Android技术知识
+            ,"https://www.jianshu.com/c/a72764a50f75"  // 安卓Android面试题
+            , "https://www.jianshu.com/c/NEt52a"       // 程序员
+            ,"https://www.jianshu.com/c/f0cf6eae1754"  // Spring Boot
+    };
+    int i = 0;
 
     //    @Scheduled(initialDelay = 2000, fixedDelay = 10 * 60000)
     @Scheduled(initialDelay = 2000, fixedDelay = TWO_HOUR)
@@ -53,7 +67,12 @@ public class Jobs {
     public void fixedDelayJob() {
         String curDate = Util.format_yyyyMMddHHmmss(new Date());
         System.out.println(curDate + " >>fixedDelay执行....");
-        Spider.create(jianShuNewsSpider).addUrl("https://www.jianshu.com/").addPipeline(mysqlPipeline).runAsync();
+        if (i > netSites.length - 1) {
+            i = 0;
+        }
+        String url = netSites[i];
+        Spider.create(jianShuNewsSpider).addUrl(url).addPipeline(mysqlPipeline).runAsync();
+        i++;
     }
 
     @Scheduled(fixedRate = ONE_HOUR)
