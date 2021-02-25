@@ -49,6 +49,10 @@
 </template>
 <script>
   import {getRequest} from '../utils/api'
+  // Local Registration
+  import {mavonEditor} from 'mavon-editor'
+  // 可以通过 mavonEditor.markdownIt 获取解析器markdown-it对象
+  import 'mavon-editor/dist/css/index.css'
 
   export default {
     methods: {
@@ -85,6 +89,9 @@
           window.open(href, '_blank')
         }
       }
+    },
+     components: {
+      mavonEditor
     },
     mounted: function () {
       var aid = this.$route.query.aid;

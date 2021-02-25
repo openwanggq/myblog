@@ -1,3 +1,4 @@
 vueblog/node_modules
 .idea
 vueblog/dist
+blogserver/target

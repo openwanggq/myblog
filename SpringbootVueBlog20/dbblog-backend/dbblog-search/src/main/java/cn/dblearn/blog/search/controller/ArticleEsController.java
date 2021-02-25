@@ -48,6 +48,7 @@ public class ArticleEsController {
 //        QueryBuilder queryBuilder = QueryBuilders.queryStringQuery(keywords);
         /*Iterable<Article> listIt =  articleRepository.search(queryBuilder);*/
         /*List<Article> articleList= Lists.newArrayList(listIt);*/
+
         //Iterable转list
         List<Article> articleList = articleService.list(new QueryWrapper<Article>().lambda().eq(Article::getPublish,true));
 
