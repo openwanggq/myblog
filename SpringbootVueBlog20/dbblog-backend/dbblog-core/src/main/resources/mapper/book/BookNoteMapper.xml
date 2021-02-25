@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dblearn.blog.mapper.book.BookNoteMapper">
+
+    <select id="listBookNoteVo" resultType="cn.dblearn.blog.entity.book.vo.BookNoteVo">
+        select * from book_note
+        <where>
+            <if test="params.title!=null and params.title !=''">
+                and title like concat('%',#{params.title},'%')
+            </if>
+        </where>
+    </select>
+
+    <sql id="homeBookNoteColumn">
+        id,title,description,author,read_num,comment_num,like_num,cover,create_time,book_id,chapter,cover_type,top
+    </sql>
+    
+    <select id="queryPageCondition" resultType="cn.dblearn.blog.entity.book.vo.BookNoteVo">
+        select <include refid="homeBookNoteColumn"/> from book_note
+        <where>
+            <if test="params.recommend != null">
+                and recommend = true
+            </if>
+            <if test="params.categoryId !=null and params.categoryId != ''">
+                and find_in_set(#{params.categoryId},category_id)
+            </if>
+            and publish = true
+        </where>
+        <if test="params.recommend !=null">
+            order by top desc, recommend desc
+        </if>
+        <if test="params.latest !=null">
+            order by top desc, create_time desc
+        </if>
+        <if test="params.favorite !=null">
+            order by top desc, like_num desc
+        </if>
+        <if test="params.commentMost !=null">
+            order by top desc, comment_num desc
+        </if>
+    </select>
+
+    <update id="updateReadNum">
+        update book_note set read_num = read_num + 1 where id = #{id}
+    </update>
+
+    <select id="getSimpleBookNoteVo" resultType="cn.dblearn.blog.entity.book.vo.BookNoteVo">
+        select <include refid="homeBookNoteColumn"/> from book_note where id = #{id}
+    </select>
+
+    <select id="listSimpleBookNote" resultType="cn.dblearn.blog.entity.book.BookNote">
+        select <include refid="homeBookNoteColumn"/> from book_note where book_id = #{bookId}
+    </select>
+
+    <update id="updateLikeNum">
+        update book_note set like_num = like_num + 1 where id = #{id}
+    </update>
+
+    <select id="checkByCategory" resultType="Integer">
+        select count(*) from book_note where category_id = #{categoryId}
+    </select>
+
+</mapper>

@@ -34,10 +34,10 @@ public class LoginRegController {
      * 退出登录
      */
     @PostMapping(value = "/logout")
-    public String logout(String username, String password) throws AuthenticationException {
+    public RespBean logout(String username, String password) throws AuthenticationException {
         // 登录成功会返回Token给用户
         SecurityContextHolder.getContext().setAuthentication(null);
-        return "{\"status\":\"success\",\"msg\":\"退出登录\"}";
+        return new RespBean("success", "退出登录!");
     }
 
     @RequestMapping(value = "/reg", method = RequestMethod.POST)

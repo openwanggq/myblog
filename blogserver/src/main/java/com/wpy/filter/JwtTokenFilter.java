@@ -58,7 +58,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                         SecurityContextHolder.getContext().setAuthentication(authentication);
                     }
                 }
-                // UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException
             } catch (ExpiredJwtException e) {
                 e.printStackTrace();
             } catch (IllegalArgumentException e) {
